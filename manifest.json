@@ -1,0 +1,17 @@
+{
+  "name": "CHERI — متجر ملابس حريمي",
+  "short_name": "CHERI",
+  "start_url": "index.html",
+  "display": "standalone",
+  "background_color": "#0b1220",
+  "theme_color": "#111827",
+  "icons": [
+    {
+      "src": "images/prod1.svg",
+      "sizes": "512x512",
+      "type": "image/svg+xml"
+    }
+  ],
+  "dir": "rtl",
+  "lang": "ar"
+}

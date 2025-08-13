@@ -1,0 +1,146 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <title>CHERI — المتجر — جميع المنتجات</title>
+  <meta name="description" content="متجر ملابس حريمي عصري بواجهة عربية كاملة، بحث، فلاتر، سلة، مفضلة، وشراء آمن.">
+  <link rel="manifest" href="manifest.json">
+  <link rel="icon" href="images/prod1.svg">
+  <meta name="theme-color" content="#111827">
+  <link rel="preload" href="styles.css" as="style">
+  <link rel="stylesheet" href="styles.css">
+  <script defer src="config.js"></script>
+  <script defer src="app.js"></script>
+</head>
+<body class="theme-dark" data-page="shop">
+  <header class="topbar container">
+    <div class="brand">
+      <button id="menuBtn" aria-label="القائمة" class="icon-btn">
+        <span class="i i-menu"></span>
+      </button>
+      <a href="index.html" class="logo">Femme</a>
+      <span class="badge beta">جديد</span>
+    </div>
+    <div class="search">
+      <input id="searchInput" type="search" placeholder="ابحثي عن فستان، بلوزة، أو ماركة…" autocomplete="off">
+      <button id="searchBtn" class="btn">بحث</button>
+    </div>
+    <nav class="actions">
+      <button id="themeToggle" class="icon-btn" aria-label="الوضع الليلي">
+        <span class="i i-moon"></span>
+      </button>
+      <a href="wishlist.html" class="icon-btn" aria-label="المفضلة">
+        <span class="i i-heart"></span>
+        <span class="counter" id="wishCount">0</span>
+      </a>
+      <a href="cart.html" class="icon-btn" aria-label="السلة">
+        <span class="i i-bag"></span>
+        <span class="counter" id="cartCount">0</span>
+      </a>
+    </nav>
+  </header>
+  <aside id="drawer" class="drawer">
+    <div class="drawer-header">
+      <div class="logo">Femme</div>
+      <button id="drawerClose" class="icon-btn"><span class="i i-x"></span></button>
+    </div>
+    <ul class="drawer-links">
+      <li><a href="index.html" class="active">الرئيسية</a></li>
+      <li><a href="shop.html">المتجر</a></li>
+      <li><a href="new.html">وصل حديثًا</a></li>
+      <li><a href="sale.html">تخفيضات</a></li>
+      <li><a href="about.html">عن المتجر</a></li>
+      <li><a href="contact.html">تواصلي معنا</a></li>
+      <li><a href="admin.html">لوحة الإدارة</a></li>
+    </ul>
+  </aside>
+  <div id="overlay" class="overlay"></div>
+  <section class="container controls">
+    <div class="chips" id="cats"></div>
+    <div class="filters">
+      <label>المقاس
+        <select id="sizeFilter">
+          <option value="">الكل</option>
+          <option>XS</option><option>S</option><option>M</option><option>L</option><option>XL</option>
+        </select>
+      </label>
+      <label>السعر
+        <input id="priceMin" type="number" placeholder="من">
+        <span>—</span>
+        <input id="priceMax" type="number" placeholder="إلى">
+      </label>
+      <label>ترتيب
+        <select id="sortSelect">
+          <option value="pop">الأكثر رواجًا</option>
+          <option value="new">الأحدث</option>
+          <option value="low">السعر: من الأقل</option>
+          <option value="high">السعر: من الأعلى</option>
+        </select>
+      </label>
+      <button id="clearFilters" class="btn ghost">مسح</button>
+    </div>
+  </section>
+  <main class="container grid" id="grid"></main>
+  <div class="container" id="pager"></div>
+  <footer class="footer">
+    <div class="container footer-grid">
+      <div>
+        <div class="logo">Femme</div>
+        <p class="muted">أزياء نسائية بمستوى احترافي، موقع ثابت يعمل مباشرة دون باك-إند مع تخزين محلي ودعم PWA.</p>
+      </div>
+      <div>
+        <h4>روابط</h4>
+        <ul>
+          <li><a href="about.html">عنّا</a></li>
+          <li><a href="contact.html">دعم العملاء</a></li>
+          <li><a href="policy.html">سياسة الخصوصية</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>انضمّي للنشرة</h4>
+        <form id="newsletterForm">
+          <input type="email" id="newsletterEmail" placeholder="بريدك الإلكتروني">
+          <button class="btn">اشتركي</button>
+        </form>
+      </div>
+    </div>
+    <div class="sub">© <span id="year"></span> Femme. جميع الحقوق محفوظة.</div>
+  </footer>
+<div id="productModal" class="modal" role="dialog" aria-modal="true" aria-labelledby="pmTitle">
+  <div class="modal-card">
+    <button class="icon-btn modal-close" id="pmClose"><span class="i i-x"></span></button>
+    <div class="modal-media"><img id="pmImg" alt=""></div>
+    <div class="modal-body">
+      <h2 id="pmTitle"></h2>
+      <p class="muted" id="pmSku"></p>
+      <div class="price-row">
+        <span class="price" id="pmPrice"></span>
+        <span class="old" id="pmOld"></span>
+        <span class="chip sale" id="pmSale">خصم</span>
+      </div>
+      <div class="opts">
+        <label>المقاس
+          <div id="pmSizes" class="size-row"></div>
+        </label>
+        <label>الكمية
+          <input id="pmQty" type="number" min="1" value="1">
+        </label>
+      </div>
+      <div class="btn-row">
+        <button class="btn primary" id="pmAdd">إضافة للسلة</button>
+        <button class="btn" id="pmWish"><span class="i i-heart"></span> مفضلة</button>
+      </div>
+      <details class="details">
+        <summary>الوصف</summary>
+        <p id="pmDesc"></p>
+      </details>
+      <details class="details">
+        <summary>الشحن والاسترجاع</summary>
+        <p>شحن خلال 48 ساعة داخل مصر. استرجاع خلال 7 أيام بحالتها الأصلية.</p>
+      </details>
+    </div>
+  </div>
+</div>
+</body>
+</html>
